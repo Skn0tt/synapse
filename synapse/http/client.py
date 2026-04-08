@@ -379,6 +379,7 @@ class BaseHttpClient:
         uri: str,
         data: bytes | None = None,
         headers: Headers | None = None,
+        timeout: int | None = None,
     ) -> IResponse:
         """
         Args:
@@ -386,6 +387,7 @@ class BaseHttpClient:
             uri: URI to query.
             data: Data to send in the request body, if applicable.
             headers: Request headers.
+            timeout: Request timeout in seconds, or None to use the default timeout.
 
         Returns:
             Response object, once the headers have been read.
@@ -434,6 +436,7 @@ class BaseHttpClient:
                     # Avoid buffering the body in treq since we do not reuse
                     # response bodies.
                     unbuffered=True,
+                    timeout=timeout,
                     **self._extra_treq_args,
                 )
 

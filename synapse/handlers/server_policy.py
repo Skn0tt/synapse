@@ -109,6 +109,7 @@ class ServerPolicyHandler:
                 headers=Headers({
                     b"Authorization": [f"Bearer {self._policyserv_api_key}"],
                 }),
+                timeout=3,  # somewhat arbitrary, but should be long enough for text matching
             )
         except HttpResponseException as ex:
             logger.info("HTTP error during policyserv request: %s", ex)
